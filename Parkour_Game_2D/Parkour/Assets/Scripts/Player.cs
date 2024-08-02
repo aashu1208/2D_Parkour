@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
     private float speed = 8f;
+    public bool isRunning;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         
-         
+        isRunning = rb.velocity.x != 0;
+        anim.SetBool("isRunning", isRunning);
     }
 }
