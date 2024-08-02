@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public bool isGrounded;
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
-    private float speed = 8f;
+    private float speed = 6f;
     public bool isRunning;
 
     // Start is called before the first frame update
@@ -22,19 +22,21 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckdistance, whatIsGround);
+
+        CheckCollision();
+        CheckInputs();
+
+    }
+
+    private void CheckInputs()
+    {
         if (Input.GetKey(KeyCode.D))
         {
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
 
         }
-        Jump();
 
-    }
-
-    private void Jump()
-    {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, speed);
@@ -44,18 +46,13 @@ public class Player : MonoBehaviour
 
     public void CheckCollision()
     {
-
-    }
-
-    public void CheckInput()
-    {
-
-
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckdistance, whatIsGround);
     }
 
     public void AnimatorController()
     {
-        
+        isRunning = rb.velocity.x != 0;
+        anim.SetBool("isRunning", isRunning);
     }
 
     private void OnDrawGizmos()
@@ -65,8 +62,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimatorController();
         
-        isRunning = rb.velocity.x != 0;
-        anim.SetBool("isRunning", isRunning);
     }
 }
