@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
     private float speed = 6f;
+    private float jumpforce = 9f;
     public bool isRunning;
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, speed);
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             Debug.Log("jumped");
         }
     }
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour
     {
         isRunning = rb.velocity.x != 0;
         anim.SetBool("isRunning", isRunning);
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
     private void OnDrawGizmos()
