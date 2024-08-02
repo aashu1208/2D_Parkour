@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
     private float speed = 6f;
-    private float jumpforce = 9f;
+    private float jumpforce = 15f;
     public bool isRunning;
 
     // Start is called before the first frame update
@@ -36,6 +36,11 @@ public class Player : MonoBehaviour
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
 
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
