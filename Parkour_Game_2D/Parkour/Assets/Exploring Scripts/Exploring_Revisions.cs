@@ -1,44 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-public abstract class Weapon : MonoBehaviour
-{
-    public abstract void Attack();
-}
-
-public class Sword : Weapon
-{
-    // Provide implementation for the Attack method
-    public override void Attack()
-    {
-        Debug.Log("Swinging the sword.");
-    }
-}
-public interface IDamageable
-    {
-
-    void takeDamage(int amount);
-}
-
-public class Exploring_Revisions : MonoBehaviour, IDamageable
+public class Exploring_Revisions : MonoBehaviour
 {
     public GameObject prefab;
     private List<GameObject> pool = new List<GameObject>();
     private int poolSize = 10;
-
-    Exploring_Revisions()
-    {
-
-
-    }
-
-    void IDamageable.takeDamage(int amount)
-    {
-        throw new System.NotImplementedException();
-        Debug.Log("");
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +25,6 @@ public class Exploring_Revisions : MonoBehaviour, IDamageable
             }
         }
     }
-
     public void SetPool()
     {
         for (int i = 0; i < poolSize; i++)
@@ -87,9 +53,4 @@ public class Exploring_Revisions : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(5f);
         obj.SetActive(false);
     }
-
-    /*void IDamageable.takeDamage(int amount)
-    {
-        throw new System.NotImplementedException();
-    }*/
 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator anim;
+
     public bool isGrounded;
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
@@ -13,7 +15,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -23,16 +26,37 @@ public class Player : MonoBehaviour
         {
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
-            
+
         }
+        Jump();
+
+    }
+
+    private void Jump()
+    {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, speed);
             Debug.Log("jumped");
         }
+    }
 
+    public void CheckCollision()
+    {
+
+    }
+
+    public void CheckInput()
+    {
+
+
+    }
+
+    public void AnimatorController()
+    {
         
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckdistance));
