@@ -24,23 +24,19 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        CheckCollision();
-        CheckInputs();
+        
         AnimatorController();
         if (playerUnlocked)
             rb.velocity = new Vector2(speed, rb.velocity.y);
-    }
-    private void FixedUpdate()
-    {
 
-        
-
+        CheckCollision();
+        CheckInputs();
     }
 
     private void CheckInputs()
     {
         if (Input.GetButtonDown("Fire1"))
-            playerUnlocked = !playerUnlocked;
+            playerUnlocked = true;
 
         if (Input.GetButtonDown("Jump") && isGrounded)
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
@@ -65,6 +61,6 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckdistance));
     }
-    // Update is called once per frame
+    
     
 }

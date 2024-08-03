@@ -25,7 +25,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void GeneratePlatform()
     {
-        while(Vector2.Distance(player.transform.position, nextPartPosition) > distanceToSpawn)
+        while(Vector2.Distance(player.transform.position, nextPartPosition) < distanceToSpawn)
         {
 
             Transform part = levelPart[Random.Range(0, levelPart.Length)];
@@ -35,4 +35,6 @@ public class LevelGenerator : MonoBehaviour
             nextPartPosition = newPart.Find("EndPosition").position;
         }
     }
+
+
 }
