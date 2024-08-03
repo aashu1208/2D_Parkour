@@ -12,20 +12,27 @@ public class Player : MonoBehaviour
     public float groundCheckdistance = 2f;
     private float speed = 6f;
     private float jumpforce = 15f;
-    public bool isRunning;
+
+    private bool playerUnlocked;
 
     // Start is called before the first frame update
     void Start()
     {
+        isGrounded = true;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
+    void Update()
+    {
+        CheckCollision();
+        CheckInputs();
+        AnimatorController();
 
+    }
     private void FixedUpdate()
     {
 
-        CheckCollision();
-        CheckInputs();
+        
 
     }
 
@@ -57,9 +64,10 @@ public class Player : MonoBehaviour
 
     public void AnimatorController()
     {
-        isRunning = rb.velocity.x != 0;
-        anim.SetBool("isRunning", isRunning);
+        
+        
         anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("xVelocity", rb.velocity.x);
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
@@ -68,9 +76,5 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckdistance));
     }
     // Update is called once per frame
-    void Update()
-    {
-        AnimatorController();
-        
-    }
+    
 }
