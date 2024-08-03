@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private float speed = 6f;
     private float jumpforce = 15f;
 
-    private bool playerUnlocked;
+    public bool playerUnlocked;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,8 @@ public class Player : MonoBehaviour
         CheckCollision();
         CheckInputs();
         AnimatorController();
-
+        if (playerUnlocked)
+            rb.velocity = new Vector2(speed, rb.velocity.y);
     }
     private void FixedUpdate()
     {
@@ -38,23 +39,12 @@ public class Player : MonoBehaviour
 
     private void CheckInputs()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
-        }
+        if (Input.GetButtonDown("Fire1"))
+            playerUnlocked = !playerUnlocked;
 
         if (Input.GetButtonDown("Jump") && isGrounded)
-        {
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             Debug.Log("jumped");
-        }
     }
 
     public void CheckCollision()
