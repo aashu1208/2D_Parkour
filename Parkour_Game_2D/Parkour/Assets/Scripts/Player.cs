@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public bool isGrounded;
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
-    private float speed = 6f;
+    private float speed = 12f;
     private float jumpforce = 15f;
 
     public bool playerUnlocked;
