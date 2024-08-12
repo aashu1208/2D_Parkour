@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -10,11 +10,17 @@ public class Player : MonoBehaviour
     public bool isGrounded;
     public LayerMask whatIsGround;
     public float groundCheckdistance = 2f;
-    private float speed = 12f;
-    private float jumpforce = 15f;
+    private float speed = 18f;
+    private float jumpforce = 20f;
+
+    public GameObject point;
 
     public bool playerUnlocked;
+    public bool doubleJump;
 
+    private Vector3 offset;
+    public Text doubleJumpPointsText;
+    private int dJPoints;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +44,37 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
             playerUnlocked = true;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump"))
+            Jump();
+        
+    }
+
+    private void Jump()
+    {
+        if (isGrounded)
+        {
+
+            doubleJump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             Debug.Log("jumped");
+
+        }
+        else if (doubleJump)
+        {
+            doubleJump = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+            dJPoints++;
+            doubleJumpPointsText.text = "" + dJPoints;
+            Points();
+        }
     }
+
+    public void Points()
+    {
+        offset = new Vector3(11f, -3f, 0f);
+        Instantiate(point, transform.position + offset, Quaternion.identity);
+    }
+
 
     public void CheckCollision()
     {
@@ -50,8 +83,8 @@ public class Player : MonoBehaviour
 
     public void AnimatorController()
     {
-        
-        
+
+        anim.SetBool("isDoubleJump", doubleJump);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("xVelocity", rb.velocity.x);
         anim.SetFloat("yVelocity", rb.velocity.y);
