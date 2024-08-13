@@ -17,10 +17,16 @@ public class Player : MonoBehaviour
 
     public bool playerUnlocked;
     public bool doubleJump;
+    public bool isSliding;
 
     private Vector3 offset;
     public Text doubleJumpPointsText;
     private int dJPoints;
+
+    [SerializeField] private Transform wallcheck;
+    [SerializeField] private Vector2 wallcheckSize;
+    public bool wallDetected;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,13 +36,21 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        
+        isSliding = false;
         AnimatorController();
-        if (playerUnlocked)
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+        if (playerUnlocked && !wallDetected)
+            Movement();
+
+        if (isGrounded)
+            doubleJump = true;
 
         CheckCollision();
         CheckInputs();
+    }
+
+    private void Movement()
+    {
+        rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
     private void CheckInputs()
@@ -46,6 +60,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
             Jump();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            isSliding = true;
+            anim.SetBool("isSliding", isSliding);
         
     }
 
@@ -54,7 +72,7 @@ public class Player : MonoBehaviour
         if (isGrounded)
         {
 
-            doubleJump = true;
+            
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             Debug.Log("jumped");
 
@@ -79,6 +97,7 @@ public class Player : MonoBehaviour
     public void CheckCollision()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckdistance, whatIsGround);
+        wallDetected = Physics2D.BoxCast(wallcheck.position, wallcheckSize, 0, Vector2.zero, whatIsGround);
     }
 
     public void AnimatorController()
@@ -93,6 +112,7 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckdistance));
+        Gizmos.DrawWireCube(wallcheck.position, wallcheckSize);
     }
     
     
