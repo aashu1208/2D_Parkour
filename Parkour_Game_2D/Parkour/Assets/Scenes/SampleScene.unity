@@ -1920,6 +1920,7 @@ MonoBehaviour:
   point: {fileID: 8052044724579016080, guid: 79bade31425b51f49965df8ca0c731a4, type: 3}
   playerUnlocked: 0
   doubleJump: 0
+  isSliding: 0
   doubleJumpPointsText: {fileID: 1570645129}
   wallcheck: {fileID: 1241660908}
   wallcheckSize: {x: 0.2, y: 2}
