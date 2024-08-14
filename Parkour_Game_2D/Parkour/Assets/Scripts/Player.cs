@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        isSliding = false;
         AnimatorController();
         if (playerUnlocked && !wallDetected)
             Movement();
@@ -46,6 +45,7 @@ public class Player : MonoBehaviour
 
         CheckCollision();
         CheckInputs();
+        Sliding();
     }
 
     private void Movement()
@@ -60,11 +60,24 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
             Jump();
+        
 
+    }
+
+    private void Sliding()
+    {
         if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
             isSliding = true;
             anim.SetBool("isSliding", isSliding);
-        
+
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isSliding = false;
+            anim.SetBool("isSliding", isSliding);
+
+        }
     }
 
     private void Jump()
