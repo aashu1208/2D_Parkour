@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 wallcheckSize;
     public bool wallDetected;
 
+    [SerializeField] private PlayerPoints playerPoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +97,7 @@ public class Player : MonoBehaviour
             doubleJump = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             dJPoints++;
+            playerPoints.jumpPoints = dJPoints;
             doubleJumpPointsText.text = "" + dJPoints;
             Points();
         }

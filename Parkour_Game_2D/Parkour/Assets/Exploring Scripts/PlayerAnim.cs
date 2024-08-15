@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     [SerializeField]private Animator anim;
+    [SerializeField] private Audio audiomanager;
+    [SerializeField] private AudioSource audioSource;
     // Update is called once per frame
     void Update()
     {
@@ -21,5 +23,7 @@ public class PlayerAnim : MonoBehaviour
             
             anim.SetBool("isSliding", false);
         }
+
+        audiomanager.SlidingAudio(audioSource);
     }
 }

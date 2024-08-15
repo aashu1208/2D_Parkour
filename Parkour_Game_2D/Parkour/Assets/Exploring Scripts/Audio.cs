@@ -8,14 +8,14 @@ public class Audio : ScriptableObject
 {
     public AudioClip jump;
     public AudioClip slide;
-    public AudioSource audioSource;
 
-    // Update is called once per frame
-    void Update()
+    public void SlidingAudio(AudioSource audioSource)
     {
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             audioSource.PlayOneShot(slide);
         }
+
     }
 }
