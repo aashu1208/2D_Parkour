@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Exploring_Revisions : MonoBehaviour
 {
-    public GameObject prefab;
-    private List<GameObject> pool = new List<GameObject>();
-    private int poolSize = 10;
+    [SerializeField]private GameObject prefab;
+    [SerializeField]private List<GameObject> pool = new List<GameObject>();
+    [SerializeField]private int poolSize = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,8 @@ public class Exploring_Revisions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Press Left Mouse Button to Get Pool objects
         if (Input.GetMouseButtonDown(0))
         {
             GameObject obj = Get_Pool();
@@ -25,6 +27,8 @@ public class Exploring_Revisions : MonoBehaviour
             }
         }
     }
+
+    //Set the Pool for the objects
     public void SetPool()
     {
         for (int i = 0; i < poolSize; i++)
@@ -35,6 +39,7 @@ public class Exploring_Revisions : MonoBehaviour
         }
     }
 
+    //Get the objects from the pool
     public GameObject Get_Pool()
     {
         for (int i = 0; i < pool.Count; i++)
@@ -48,6 +53,7 @@ public class Exploring_Revisions : MonoBehaviour
         return null;
     }
 
+    //Return to Pool after 5 seconds
     IEnumerator Time_To_Return_Pool(GameObject obj)
     {
         yield return new WaitForSeconds(5f);

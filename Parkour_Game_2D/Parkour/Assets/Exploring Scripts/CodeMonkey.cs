@@ -5,32 +5,47 @@ using UnityEngine;
 public class CodeMonkey : MonoBehaviour
 {
 
-    enum PlayerAction
+   /* enum PlayerAction
     {
         a,
         b,
         c,
         d
 
-    }
+    }*/
 
-    PlayerAction PA()
+    /*PlayerAction PA()
     {
 
         return PlayerAction.a;
         Debug.Log("");
 
     }
-
+*/
     // Start is called before the first frame update
     void Start()
     {
+        SetNumber();
+    }
+    public int RecursionIncrementer(int number)
+    {
+        if (number<5)
+        {
+            return number+1;
+        }
+        else
+        {
+            return number - 1;
+        }
+
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetNumber()
     {
+
         
+        Debug.Log(RecursionIncrementer(6));
+
     }
 }
