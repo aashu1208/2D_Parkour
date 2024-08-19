@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class CodeMonkey : MonoBehaviour
 {
+    public static CodeMonkey instance { get; private set; }
 
-   /* enum PlayerAction
+    private void Awake()
     {
-        a,
-        b,
-        c,
-        d
 
-    }*/
+        if (instance != null)
+        {
+            //instance = this;
+            Debug.LogError("Instance already exist");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+      /*  else
+        {
+            DontDestroyOnLoad(this);
+        }
+      */
+    }
+
+    /* enum PlayerAction
+     {
+         a,
+         b,
+         c,
+         d
+
+     }*/
 
     /*PlayerAction PA()
     {
@@ -25,9 +44,9 @@ public class CodeMonkey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetNumber();
+        //SetNumber();
     }
-    public int RecursionIncrementer(int number)
+    /*public int RecursionIncrementer(int number)
     {
         if (number<5)
         {
@@ -47,5 +66,5 @@ public class CodeMonkey : MonoBehaviour
         
         Debug.Log(RecursionIncrementer(6));
 
-    }
+    }*/
 }
