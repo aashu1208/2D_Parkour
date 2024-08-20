@@ -9,11 +9,22 @@ public class Exploring_Revisions : MonoBehaviour
 
     private void Start()
     {
-        
+        Set_Pool();
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameObject obj = Get_Pool();
+            if (obj != null)
+            {
+
+                StartCoroutine(Return_To_Pool(obj));
+
+            }
+        }
+
         
     }
 
@@ -43,7 +54,7 @@ public class Exploring_Revisions : MonoBehaviour
         return null;
     }
 
-    IEnumerator Return_To_Pool(GameObject obj)
+    public IEnumerator Return_To_Pool(GameObject obj)
     {
         yield return new WaitForSeconds(3f);
         obj.SetActive(false);
