@@ -12,6 +12,27 @@ public class CodeMonkey : MonoBehaviour
     public Queue<string> queueString = new Queue<string>();
     public HashSet<string> hashsetString = new HashSet<string>();*/
 
+    public delegate void Practice();
+    public static Practice pr;
+
+    public void MyClickButton()
+    {
+        pr();
+
+    }
+    public class Into_to_Object
+    {
+
+        public void IntObject()
+        {
+
+            int a = 5;
+            object obj = a;
+            int b = (int)a;
+
+        }
+        
+    }
     public struct PlayerStruct
     {
         public int a;
