@@ -12,12 +12,24 @@ public class CodeMonkey : MonoBehaviour
     public Queue<string> queueString = new Queue<string>();
     public HashSet<string> hashsetString = new HashSet<string>();*/
 
-    public delegate void Practice();
-    public static Practice pr;
+    public delegate void Prac();
+    public static Prac pr;
 
+
+
+    private void OnEnable()
+    {
+        pr += MyClickButton;
+    }
+
+    private void OnDisable()
+    {
+        pr -= MyClickButton;
+    }
     public void MyClickButton()
     {
-        pr();
+        //pr();
+        Debug.Log("My click Button");
 
     }
     public class Into_to_Object
@@ -70,7 +82,7 @@ public class CodeMonkey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerStruct ps = new PlayerStruct();
+        /*PlayerStruct ps = new PlayerStruct();
         ps.a = 2;
         PlayerClass pc = new PlayerClass();
         pc.b = 2;
@@ -81,7 +93,7 @@ public class CodeMonkey : MonoBehaviour
         TestFuncClass(pc);
 
         Debug.Log("Player struct 2nd value of a: " + ps.a);
-        Debug.Log("Player class 2nd value of b: " + pc.b);
+        Debug.Log("Player class 2nd value of b: " + pc.b);*/
     }
     
 }
