@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ScoreDisplay : MonoBehaviour
+public class ScoreDisplay : MonoBehaviour, IObserver
 {
-    // Start is called before the first frame update
-    void Start()
+    public Text scoreText;
+
+    public void Update(int score)
     {
-        
+
+        scoreText.text = score.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+}
+
+public class AchievementSystem: MonoBehaviour, IObserver
+{
+
+    public void Update(int score)
     {
-        
+        if (score>=100)
+        {
+            Debug.Log("Achievements Unlocked");
+        }
     }
+
 }
